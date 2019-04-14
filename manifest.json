@@ -1,0 +1,15 @@
+{
+	"manifest_version": 2,
+	"name": "Hangul",
+	"version": "1.0",
+	"browser_action": {
+		"default_icon": "icon.svg"
+	},
+	"description": "Type hangul in Firefox.",
+	"background": {
+		"scripts": [ "background.js" ]
+	},
+	"content_scripts": [
+		{ "matches": ["<all_urls>"], "js": ["toHangul.js"] }
+	]
+}
