@@ -92,4 +92,9 @@ const typeHangul = (ev) => {
 		e.value = res;
 };
 
-document.addEventListener('keyup', typeHangul, { capture: true });
+document.addEventListener('keyup', function (ev) {
+	browser.storage.sync.get('enabled').then(store => {
+		if (store.enabled)
+			typeHangul(ev);
+	});
+}, { capture: true });

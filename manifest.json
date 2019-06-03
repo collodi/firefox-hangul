@@ -9,7 +9,11 @@
 	"background": {
 		"scripts": [ "background.js" ]
 	},
+	"permissions": [ "storage" ],
 	"content_scripts": [
 		{ "matches": ["<all_urls>"], "js": ["toHangul.js"] }
-	]
+	],
+	"browser_specific_settings": {
+		"gecko": { "id": "firefox-hangul@nothing.org" }
+	}
 }
