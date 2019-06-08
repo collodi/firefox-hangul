@@ -92,9 +92,23 @@ const typeHangul = (ev) => {
 		e.value = res;
 };
 
-document.addEventListener('keyup', function (ev) {
+const convertHangul = function (ev) {
+	console.log(ev);
 	browser.storage.sync.get('enabled').then(store => {
 		if (store.enabled)
 			typeHangul(ev);
 	});
+};
+
+document.addEventListener('load', function (ev) {
+	const iframes = document.getElementsByTagName('iframe');
+
+	for (let i = 0; i < iframes.length; i++) {
+		if (iframes[i].height > 100) {
+			console.log(iframes[i]);
+			iframes[i].addEventListener('keyup', convertHangul, { capture: true });
+		}
+	}
 }, { capture: true });
+
+document.addEventListener('keyup', convertHangul, { capture: true });
