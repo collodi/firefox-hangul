@@ -1,6 +1,6 @@
 let enabled = false;
 
-browser.browserAction.onClicked.addListener(() => {
+function toggleEnabled() {
 	if (!enabled) {
 		browser.browserAction.setIcon({ path: "icon-green.svg" });
 	} else {
@@ -9,4 +9,13 @@ browser.browserAction.onClicked.addListener(() => {
 
 	enabled = !enabled;
 	browser.storage.sync.set({ enabled: enabled });
+}
+
+browser.browserAction.onClicked.addListener(() => {
+	toggleEnabled();
+});
+
+browser.runtime.onMessage.addListener(msg => {
+	if (msg === 'toggle')
+		toggleEnabled();
 });

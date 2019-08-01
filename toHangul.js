@@ -93,7 +93,14 @@ const typeHangul = (ev) => {
 };
 
 const convertHangul = function (ev) {
-	console.log(ev);
+	if (ev.key === ' ' && ev.ctrlKey) {
+		browser.runtime.sendMessage('toggle');
+
+		ev.preventDefault();
+		ev.stopPropagation();
+		return false;
+	}
+
 	browser.storage.sync.get('enabled').then(store => {
 		if (store.enabled)
 			typeHangul(ev);
